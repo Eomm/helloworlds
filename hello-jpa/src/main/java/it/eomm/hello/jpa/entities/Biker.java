@@ -41,10 +41,6 @@ public class Biker implements Serializable {
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<MotorBike> motorBikes;
 
-    public void(String battleName) {
-        this.battleName = battleName;
-    }
-
     public Long getId() {
         return this.id;
     }
@@ -63,6 +59,10 @@ public class Biker implements Serializable {
 
     public String getBattleName() {
         return battleName;
+    }
+
+    public void setBattleName(String battleName) {
+        this.battleName = battleName;
     }
 
     public Boolean getBeard() {
