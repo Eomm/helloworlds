@@ -25,10 +25,15 @@ public class MotorcycleRally implements IMotorcycleRally {
     }
 
     public Biker updateBiker(Biker biker) {
-        return null;
+        EntityManager em = EntityManagerUtil.getEntityManager();
+        em.getTransaction().begin();
+        em.merge(biker);
+        em.getTransaction().commit();
+        return biker;
     }
 
     public Biker findById(Long id) {
-        return null;
+        EntityManager em = EntityManagerUtil.getEntityManager();
+        return em.find(Biker.class, id);
     }
 }

@@ -22,7 +22,7 @@ public class EntityManagerUtil {
             EntityManagerFactory emFactory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 
 
-            return emFactory.createEntityManager();
+            entityManager = emFactory.createEntityManager();
         }
         return entityManager;
     }
