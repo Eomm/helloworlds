@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>it.eomm.hello</groupId>
+    <artifactId>aop</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <version.aspect>1.8.10</version.aspect>
+    </properties>
+
+    <dependencies>
+
+        <!-- AspectJ Runtime -->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+            <version>${version.aspect}</version>
+        </dependency>
+
+        <!-- This JAR is used fot apply the Aspects to the objects reading the aspectj.xml;
+            with Spring this configuration's xml isn't necessary. -->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>${version.aspect}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.9</version>
+                <!-- This configuration is needed for run AspectJ without Spring. This will cause the loading of the aop.xml via LTW -->
+                <configuration>
+                    <argLine>
+                        -javaagent:${settings.localRepository}\org\aspectj\aspectjweaver\${version.aspect}\aspectjweaver-${version.aspect}.jar
+                    </argLine>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
