@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is read by the AspecJ Agent -->
+<aspectj>
+
+    <!--  <weaver options="-verbose -debug -showWeaveInfo"> -->
+    <weaver>
+        <include within="it.eomm.hello.aop..*"/>
+    </weaver>
+
+    <aspects>
+        <aspect name="it.eomm.hello.aop.PlaygroundAspect"/>
+    </aspects>
+
+</aspectj>
