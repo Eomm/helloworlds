@@ -1,4 +1,4 @@
-#JPA 2.1
+# JPA 2.1
 **JPA** (Java Persistence Api) is a specification for provide an object/relational mapping (ORM) facility using Java domain model to manage a relational database.
 
 The specification 2.1 was released in 22/05/2013, and it can be found here: [oracle.com](http://download.oracle.com/otndocs/jcp/persistence-2_1-fr-eval-spec/index.html)
@@ -24,7 +24,7 @@ The most famous implementations of JPA 2.1 are (alphabetical order):
 - Hibernate
 - OpenJPA 
 
-###Demo
+### Demo
 In this project are shown almost all the feature that JPA offer, without worrying about the database or the implementation of the spec used.
 It is a `maven` project, and you can run with this instruction:
 

@@ -96,4 +96,42 @@ public class TestJpa {
 
     }
 
+    @Test
+    public void searchAllBikers() {
+        int deleted = crud.deleteAllBikers();
+        Assert.assertTrue(deleted >= 0);
+
+        final int bikersNumber = 10;
+        for (int i = 0; i < 10; i++) {
+            Biker insert = BikersFactory.buildRandomBiker();
+            insert = crud.saveBiker(insert);
+        }
+
+        List<Biker> bikers = crud.findAllBikers();
+        Assert.assertEquals(bikersNumber, bikers.size());
+    }
+
+    @Test
+    public void searchCriteria() {
+        int deleted = crud.deleteAllBikers();
+        Assert.assertTrue(deleted >= 0);
+
+        final int bikersNumber = 10;
+        int bearded = 0;
+        int notBeaderded = 0;
+        for (int i = 0; i < 10; i++) {
+            Biker insert = BikersFactory.buildRandomBiker();
+            bearded += (i % 3 == 0) ? 1 : 0;
+            notBeaderded += i % 3 == 0 ? 0 : 1;
+            insert.setBeard(i % 3 == 0);
+            insert = crud.saveBiker(insert);
+        }
+
+        List<Biker> res = crud.findBiker(null, true);
+        Assert.assertTrue(bearded == res.size());
+
+        res = crud.findBiker(null, false);
+        Assert.assertTrue(notBeaderded == res.size());
+    }
+
 }
