@@ -32,7 +32,7 @@ public class MotorcycleRally implements IMotorcycleRally {
      * This method uses CRITERIA API
      *
      * @param registrationDate
-     * @param bearded
+     * @param bearded          search for biker with or without the bear, if null doesn't apply any filter
      * @return
      */
     public List<Biker> findBiker(Date registrationDate, Boolean bearded) {
@@ -45,9 +45,8 @@ public class MotorcycleRally implements IMotorcycleRally {
         Root<Biker> bikerRoot = criteria.from(Biker.class);
 
         if (registrationDate != null) {
-//            TODO
-//            Predicate p = build.lessThanOrEqualTo( bikerRoot.get("registrationDate"), registrationDate);
-//            filterList.add(p);
+            Predicate p = build.lessThan(bikerRoot.<Date>get("registrationDate"), registrationDate);
+            filterList.add(p);
         }
 
         if (bearded != null) {

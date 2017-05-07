@@ -35,7 +35,7 @@ public class Biker implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date birthday;
 
-    @Temporal(TemporalType.TIME)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date registrationDate;
 
     @Transient // --> this annotiation make the field transient only for JPA
