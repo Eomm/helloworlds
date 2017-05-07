@@ -9,7 +9,10 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -94,6 +97,58 @@ public class TestJpa {
 
         // TODO Assert
 
+    }
+
+    @Test
+    public void searchAllBikers() {
+        int deleted = crud.deleteAllBikers();
+        Assert.assertTrue(deleted >= 0);
+
+        final int bikersNumber = 10;
+        for (int i = 0; i < 10; i++) {
+            Biker insert = BikersFactory.buildRandomBiker();
+            insert = crud.saveBiker(insert);
+        }
+
+        List<Biker> bikers = crud.findAllBikers();
+        Assert.assertEquals(bikersNumber, bikers.size());
+    }
+
+    @Test
+    public void searchCriteria() throws ParseException {
+        int deleted = crud.deleteAllBikers();
+        Assert.assertTrue(deleted >= 0);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        final int bikersNumber = 10;
+        int bearded = 0;
+        int notBeaderded = 0;
+        for (int i = 0; i < 10; i++) {
+            Biker insert = BikersFactory.buildRandomBiker();
+
+            boolean haveBear = i % 3 == 0;
+            bearded += (haveBear) ? 1 : 0;
+            notBeaderded += (haveBear) ? 0 : 1;
+            insert.setBeard(haveBear);
+
+            if (haveBear) {
+                insert.setRegistrationDate(sdf.parse("25/12/2099"));
+            }
+
+            insert = crud.saveBiker(insert);
+        }
+
+        List<Biker> res = crud.findBiker(null, true);
+        Assert.assertEquals(bearded, res.size());
+
+        res = crud.findBiker(null, false);
+        Assert.assertEquals(notBeaderded, res.size());
+
+        res = crud.findBiker(new Date(), false);
+        Assert.assertEquals(notBeaderded, res.size());
+
+        res = crud.findBiker(new Date(), true);
+        Assert.assertEquals(0, res.size());
     }
 
 }

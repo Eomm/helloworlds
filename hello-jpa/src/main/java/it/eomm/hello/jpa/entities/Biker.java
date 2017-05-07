@@ -11,6 +11,13 @@ import java.util.List;
  */
 @Entity
 @Table(name = "BIKER")
+@NamedQueries({
+        // In HQL (or JPQL) queries you must use the names of the types (java)
+        @NamedQuery(
+                name = "findAllBikers",
+                query = "SELECT b FROM Biker b"
+        )
+})
 public class Biker implements Serializable {
 
     @Id
@@ -28,7 +35,7 @@ public class Biker implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date birthday;
 
-    @Temporal(TemporalType.TIME)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date registrationDate;
 
     @Transient // --> this annotiation make the field transient only for JPA

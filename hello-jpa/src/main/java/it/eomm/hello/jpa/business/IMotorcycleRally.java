@@ -2,6 +2,7 @@ package it.eomm.hello.jpa.business;
 
 import it.eomm.hello.jpa.entities.Biker;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -10,6 +11,10 @@ import java.util.List;
 public interface IMotorcycleRally {
 
     List<Biker> findAllBikers();
+
+    List<Biker> findBiker(Date registrationDate, Boolean bearded);
+
+    Integer deleteAllBikers();
 
     Biker saveBiker(Biker biker);
 
