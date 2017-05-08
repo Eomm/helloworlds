@@ -12,15 +12,50 @@ import javax.jdo.annotations.PrimaryKey;
 public class Product {
 
     @PrimaryKey
-    @Persistent(valueStrategy = IdGeneratorStrategy.INCREMENT)
-    long id;
-    String name = null;
-    String description = null;
-    double price = 0.0;
+    @Persistent(valueStrategy = IdGeneratorStrategy.UUIDHEX)
+    private String id;
+
+    private String name = null;
+
+    private String description = null;
+
+    private double price = 0.0;
 
     public Product(String name, String desc, double price) {
         this.name = name;
         this.description = desc;
+        this.price = price;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
         this.price = price;
     }
 }

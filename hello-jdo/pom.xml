@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
@@ -27,8 +27,33 @@
         <!-- JDO implementation -->
         <dependency>
             <groupId>org.datanucleus</groupId>
+            <artifactId>datanucleus-core</artifactId>
+            <version>5.1.0-m2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.datanucleus</groupId>
             <artifactId>datanucleus-api-jdo</artifactId>
             <version>5.1.0-m2</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.datanucleus/javax.jdo -->
+        <dependency>
+            <groupId>org.datanucleus</groupId>
+            <artifactId>javax.jdo</artifactId>
+            <version>3.2.0-m6</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.datanucleus/datanucleus-json -->
+        <dependency>
+            <groupId>org.datanucleus</groupId>
+            <artifactId>datanucleus-json</artifactId>
+            <version>5.1.0-m2</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/junit/junit -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>
@@ -48,8 +73,8 @@
                 <artifactId>datanucleus-maven-plugin</artifactId>
                 <version>5.0.2</version>
                 <configuration>
-                    <log4jConfiguration>${basedir}/log4j.properties</log4jConfiguration>
                     <verbose>true</verbose>
+                    <log4jConfiguration>${basedir}/src/main/resources/log4j.properties</log4jConfiguration>
                 </configuration>
                 <executions>
                     <execution>
