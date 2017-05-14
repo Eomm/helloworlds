@@ -1,9 +1,6 @@
 package it.eomm.hello.jdo.model;
 
-import javax.jdo.annotations.IdGeneratorStrategy;
-import javax.jdo.annotations.PersistenceCapable;
-import javax.jdo.annotations.Persistent;
-import javax.jdo.annotations.PrimaryKey;
+import javax.jdo.annotations.*;
 
 /**
  * Created by Manuel Spigolon on 07/05/2017.
@@ -13,13 +10,20 @@ public class Product {
 
     @PrimaryKey
     @Persistent(valueStrategy = IdGeneratorStrategy.UUIDHEX)
+    @Column(name = "PRODUCT_ID")
     private String id;
 
+    @Persistent
     private String name = null;
 
+    @Persistent
     private String description = null;
 
+    @Persistent
     private double price = 0.0;
+
+    @Element(mappedBy = "Inventory")
+    private Inventory inventory;
 
     public Product(String name, String desc, double price) {
         this.name = name;

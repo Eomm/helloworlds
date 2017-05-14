@@ -1,5 +1,6 @@
 package it.eomm.hello.jdo.model;
 
+import javax.jdo.annotations.Element;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.PrimaryKey;
 import java.util.HashSet;
@@ -13,6 +14,8 @@ public class Inventory {
 
     @PrimaryKey
     String name = null;
+
+    @Element(column = "INVENTORY_ID", dependent = "true")
     Set<Product> products = new HashSet<Product>();
 
     public Inventory(String name) {

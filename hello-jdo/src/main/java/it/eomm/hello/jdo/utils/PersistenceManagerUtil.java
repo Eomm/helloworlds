@@ -10,7 +10,8 @@ import javax.jdo.PersistenceManagerFactory;
  */
 public class PersistenceManagerUtil {
 
-    public static final String PERSISTENCE_UNIT_NAME = "hello-jdo-pu";
+    // the same in jdoconfig.xml
+    public static final String PERSISTENCE_UNIT_NAME = "hello-jdo-pm";
 
     private static PersistenceManager persistenceManager;
 
@@ -19,12 +20,20 @@ public class PersistenceManagerUtil {
 
     public static PersistenceManager getEntityManager() {
         if (persistenceManager == null) {
-            // the same in persistence.xml
-
             PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory(PERSISTENCE_UNIT_NAME);
             persistenceManager = pmf.getPersistenceManager();
         }
         return persistenceManager;
+    }
+
+    /**
+     * Closing a PersistenceManager might release it to the pool of available PersistenceManagers,
+     * or might be garbage collected, at the option of the JDO implementation.
+     */
+    public static void release() {
+        if (persistenceManager != null) {
+            persistenceManager.close();
+        }
     }
 
 

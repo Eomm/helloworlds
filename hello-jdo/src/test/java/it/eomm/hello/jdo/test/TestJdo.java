@@ -1,6 +1,6 @@
 package it.eomm.hello.jdo.test;
 
-import it.eomm.hello.jdo.business.BookDao;
+import it.eomm.hello.jdo.business.LibraryDao;
 import it.eomm.hello.jdo.model.Inventory;
 import it.eomm.hello.jdo.model.Product;
 import org.junit.Assert;
@@ -13,14 +13,27 @@ import org.junit.Test;
 public class TestJdo {
 
 
-    private BookDao crud;
+    private LibraryDao crud;
 
     /**
      * This method is executed BEFORE each `@Test`
      */
     @Before
     public void before() {
-        crud = new BookDao();
+        crud = new LibraryDao();
+    }
+
+    @Test
+    public void insertProduct() {
+        Product product = new Product("Hello", "Hello World", 11.99);
+
+        // assert the id doesn't exist
+        Assert.assertNull(product.getId());
+
+        product = crud.insertProduct(product);
+
+        // assert the id has been set
+        Assert.assertNotNull(product.getId());
     }
 
     @Test
@@ -36,7 +49,7 @@ public class TestJdo {
         // assert the id has been set
         Assert.assertNotNull(product.getId());
 
-        // TODO
+        // TODO test select
     }
 
 }

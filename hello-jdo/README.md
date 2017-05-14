@@ -25,6 +25,8 @@ A list of implementations are on the [Apache's site](https://db.apache.org/jdo/i
 In this project are shown some base concepts of JDO, without worrying about the persistence.
                 It is a `maven` project, and you can run with this instruction:
 
-`mvn test`
+`mvn compile test`
+
+All the JDO Annotations are described [here](https://db.apache.org/jdo/annotations.html).
 
 If you have some suggest, comment or send me a message on GitHub, I will appreciate any feedback.

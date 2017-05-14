@@ -41,11 +41,27 @@
             <artifactId>javax.jdo</artifactId>
             <version>3.2.0-m6</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.datanucleus/datanucleus-json -->
+
+        <!-- STORAGE DEPENDANCIES -->
+        <!-- JSON:TODO -->
+        <!--<dependency>-->
+        <!--<groupId>org.datanucleus</groupId>-->
+        <!--<artifactId>datanucleus-json</artifactId>-->
+        <!--<version>5.1.0-m2</version>-->
+        <!--</dependency>-->
+
+        <!-- DATABASE -->
+        <!-- https://mvnrepository.com/artifact/org.datanucleus/datanucleus-rdbms -->
         <dependency>
             <groupId>org.datanucleus</groupId>
-            <artifactId>datanucleus-json</artifactId>
+            <artifactId>datanucleus-rdbms</artifactId>
             <version>5.1.0-m2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.4.193</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/junit/junit -->
