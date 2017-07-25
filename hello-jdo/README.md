@@ -22,6 +22,7 @@ An implementation of JDO must pass all the TCK (Technology Compatibility Kit) te
 
 A list of implementations are on the [Apache's site](https://db.apache.org/jdo/impls.html).
 
+### Demo
 In this project are shown some base concepts of JDO, without worrying about the persistence.
                 It is a `maven` project, and you can run with this instruction:
 
