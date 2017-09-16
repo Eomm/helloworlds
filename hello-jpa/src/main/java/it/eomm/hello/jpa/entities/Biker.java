@@ -1,6 +1,8 @@
 package it.eomm.hello.jpa.entities;
 
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -9,6 +11,12 @@ import java.util.List;
 /**
  * Created by Manuel Spigolon on 02/02/2017.
  */
+
+// By default, the placement of the @Id annotation gives the default access strategy.
+// At Class level set the default behaviour in case of multiple AccessType configuration.
+// With access at PROPERTY you have to annotate with @Transient all the helper methods or bidirectional associations
+@Access(AccessType.FIELD)
+
 @Entity
 @Table(name = "BIKER")
 @NamedQueries({
@@ -20,8 +28,14 @@ import java.util.List;
 })
 public class Biker implements Serializable {
 
+    /**
+     * @Access, in conjunction with the relations @OneToOne, let get the ID of the objects <b>without</b> making a
+     * select for getting all the columns. This because the Proxy think that is a standard field access and loads
+     * the whole record.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Access(AccessType.PROPERTY)
     private Long id;
 
     @Column(name = "bikerName")
@@ -38,15 +52,25 @@ public class Biker implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date registrationDate;
 
-    @Transient // --> this annotiation make the field transient only for JPA
+    @Transient // --> this annotation make the field transient only for JPA
     private transient String criminalRecord; // this keyword make the field transient for JPA and serialization
 
     /* without mappedBy attribute, a third-party table will be generated,
      * but specify the java-field that represents the FK relation, the connection
      * will be established correctly.
      */
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<MotorBike> motorBikes;
+
+    // SELF-JOIN
+    @OneToOne(optional = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "friendId", nullable = true)
+    private Biker bestFriend;
+
+    // Another Self-Join
+    @OneToOne(optional = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "enemyId", nullable = true)
+    private Biker worseFriend;
 
     public Long getId() {
         return this.id;
@@ -104,11 +128,32 @@ public class Biker implements Serializable {
         this.criminalRecord = criminalRecord;
     }
 
+    /**
+     * This configuration work overriding the default AccessType (FILED in this class example)
+     */
+//    @Access(AccessType.PROPERTY)
+//    @OneToMany(...)
     public List<MotorBike> getMotorBikes() {
         return motorBikes;
     }
 
     public void setMotorBikes(List<MotorBike> motorBikes) {
         this.motorBikes = motorBikes;
+    }
+
+    public Biker getBestFriend() {
+        return bestFriend;
+    }
+
+    public void setBestFriend(Biker bestFriend) {
+        this.bestFriend = bestFriend;
+    }
+
+    public Biker getWorseFriend() {
+        return worseFriend;
+    }
+
+    public void setWorseFriend(Biker worseFriend) {
+        this.worseFriend = worseFriend;
     }
 }

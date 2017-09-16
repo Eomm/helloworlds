@@ -5,6 +5,7 @@ import it.eomm.hello.jpa.business.MotorcycleRally;
 import it.eomm.hello.jpa.entities.Biker;
 import it.eomm.hello.jpa.entities.MotorBike;
 import it.eomm.hello.jpa.utils.BikersFactory;
+import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,7 +21,8 @@ import java.util.List;
  */
 public class TestJpa {
 
-
+    private static Logger log = Logger.getLogger(TestJpa.class);
+    
     private IMotorcycleRally crud;
 
     /**
@@ -73,6 +75,8 @@ public class TestJpa {
 
         Biker manuel = new Biker();
         manuel.setName("Manuel");
+        manuel.setBattleName("Eomm");
+        manuel.setRegistrationDate(new Date());
         manuel.setBeard(false);
 
         MotorBike bikeDucati = new MotorBike();
@@ -149,6 +153,71 @@ public class TestJpa {
 
         res = crud.findBiker(new Date(), true);
         Assert.assertEquals(0, res.size());
+    }
+
+    @Test
+    public void getOwenerByMotorBike() {
+        final String modelNo = "42";
+
+        Biker manuel = new Biker();
+        manuel.setName("Manuel");
+        manuel.setBeard(false);
+
+        MotorBike bikeDucati = new MotorBike();
+        bikeDucati.setModelNo(modelNo);
+        bikeDucati.setModel("Ducati 696");
+        bikeDucati.setOwner(manuel);
+
+        crud.saveBiker(manuel);
+
+        MotorBike search = crud.findById(modelNo);
+
+        Assert.assertEquals(search.getModel(), bikeDucati.getModel());
+        Assert.assertEquals(search.getOwner().getName(), bikeDucati.getOwner().getName());
+    }
+
+    @Test
+    public void testInsertFriend() {
+        Biker bikerB = new Biker();
+        bikerB.setName("Good Friend");
+        bikerB.setBeard(false);
+
+        Biker bikerC = new Biker();
+        bikerC.setName("Bad Enemy");
+        bikerC.setBeard(false);
+
+        Biker bikerA = new Biker();
+        bikerA.setName("Main Biker");
+        bikerA.setBeard(true);
+        bikerA.setBestFriend(bikerB);
+        bikerA.setWorseFriend(bikerC);
+
+        crud.saveBiker(bikerA);
+
+        Biker fromDb = crud.findById(bikerA.getId());
+
+        Assert.assertNotNull(fromDb.getBestFriend().getId());
+        Assert.assertNotNull(fromDb.getWorseFriend().getId());
+    }
+
+    @Test
+    public void viewLazyLoadingInAction() {
+        testInsertFriend();
+
+        List<Biker> resultList = crud.executeForList("SELECT b FROM Biker b where b.name='Main Biker'", Biker.class);
+
+        // NB: the first-level caching MUST BE bypassed to see the real effect on the System.out.
+        // In this case executeForList
+        for (Biker bb : resultList) {
+            // Thank's to @Access
+            log.info("This will NOT does a query: " + bb.getBestFriend().getId());
+            log.info("This will NOT does a query: " + bb.getWorseFriend().getId());
+
+            // Thank's to EAGER
+            log.info("This will NOT does a query: " + bb.getBestFriend().getName());
+
+            log.info("This WILL does a query: " + bb.getWorseFriend().getName());
+        }
     }
 
 }

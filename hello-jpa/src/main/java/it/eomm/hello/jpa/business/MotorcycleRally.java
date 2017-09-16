@@ -1,9 +1,12 @@
 package it.eomm.hello.jpa.business;
 
 import it.eomm.hello.jpa.entities.Biker;
+import it.eomm.hello.jpa.entities.MotorBike;
 import it.eomm.hello.jpa.utils.EntityManagerUtil;
+import org.hibernate.Session;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -94,5 +97,31 @@ public class MotorcycleRally implements IMotorcycleRally {
         int deleted = em.createNativeQuery("DELETE FROM BIKER").executeUpdate();
         em.getTransaction().commit();
         return deleted;
+    }
+
+    public MotorBike findById(String modelNo) {
+        EntityManager em = EntityManagerUtil.getEntityManager();
+        return em.find(MotorBike.class, modelNo);
+    }
+
+    /**
+     * For getting the Session do:
+     * Session session = em.unwrap(Session.class);
+     *
+     * @param hsql
+     * @param clazz
+     * @param <T>
+     * @return
+     */
+    public <T> List<T> executeForList(String hsql, Class<T> clazz) {
+        EntityManager em = EntityManagerUtil.getEntityManager();
+
+        // This will clear the first-cache
+        Session session = em.unwrap(Session.class);
+        session.clear();
+
+        Query query = em.createQuery(hsql);
+        List result = query.getResultList();
+        return result;
     }
 }

@@ -17,7 +17,7 @@ public class MotorBike {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id", nullable = false)
-    private Biker owner;
+    public Biker owner;
 
     public String getModelNo() {
         return modelNo;

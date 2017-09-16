@@ -9,17 +9,18 @@
 
         <properties>
             <!-- ~ = relative to current user home directory -->
-            <property name="javax.persistence.jdbc.url" value="jdbc:h2:./test.db"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:h2:./test.db;TRACE_LEVEL_SYSTEM_OUT=1"/> <!-- 3 = debug level -->
             <property name="javax.persistence.jdbc.user" value=""/>
             <property name="javax.persistence.jdbc.password" value=""/>
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
             <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.use_sql_comments" value="true"/>
             <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
             <!--<property name="hibernate.format_sql" value="true" />-->
             <!--<property name="hibernate.hbm2ddl.auto" value="validate" />-->
 
-            <!-- Configuring Connection Pool -->
+            <!-- TODO: Configuring Connection Pool -->
             <!--<property name="hibernate.c3p0.min_size" value="5" />-->
             <!--<property name="hibernate.c3p0.max_size" value="20" />-->
             <!--<property name="hibernate.c3p0.timeout" value="500" />-->
