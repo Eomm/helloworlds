@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Order(value = 2)
-public class CommandLineTwo implements CommandLineRunner{
+public class CommandLineTwo implements CommandLineRunner {
 
 
     @Override

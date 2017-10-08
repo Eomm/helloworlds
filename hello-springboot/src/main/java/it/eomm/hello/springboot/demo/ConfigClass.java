@@ -19,28 +19,13 @@ import java.util.List;
 @Validated
 public class ConfigClass {
 
+    @Valid // for nested class
+    private final SubTag subTag = new SubTag();
     // Ensure that a compliant JSR-303 implementation is on your classpath
     @NotNull
     private String stringProp;
-
     private Integer numberProp;
-
     private List<String> stringList;
-
-    @Valid // for nested class
-    private final SubTag subTag = new SubTag();
-
-    public static class SubTag {
-        private String anotherString;
-
-        public String getAnotherString() {
-            return anotherString;
-        }
-
-        public void setAnotherString(String anotherString) {
-            this.anotherString = anotherString;
-        }
-    }
 
     public String getStringProp() {
         return stringProp;
@@ -68,5 +53,17 @@ public class ConfigClass {
 
     public void setStringList(List<String> stringList) {
         this.stringList = stringList;
+    }
+
+    public static class SubTag {
+        private String anotherString;
+
+        public String getAnotherString() {
+            return anotherString;
+        }
+
+        public void setAnotherString(String anotherString) {
+            this.anotherString = anotherString;
+        }
     }
 }
