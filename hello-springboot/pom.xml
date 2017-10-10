@@ -10,7 +10,7 @@
 
 
     <!-- SONO ARRIVATO QUI -->
-    <!-- https://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/#boot-features-developing-web-applications -->
+    <!-- https://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/#boot-features-error-handling -->
 
     <properties>
         <java.version>1.8</java.version>

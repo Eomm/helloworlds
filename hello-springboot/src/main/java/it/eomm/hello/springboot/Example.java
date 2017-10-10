@@ -1,7 +1,7 @@
 package it.eomm.hello.springboot;
 
+import it.eomm.hello.springboot.demo.converter.MyObject;
 import it.eomm.hello.springboot.demo.lang.LangRequester;
-import it.eomm.hello.springboot.demo.lang.LangResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
@@ -10,9 +10,9 @@ import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 
 /**
@@ -62,6 +62,11 @@ public class Example {
     @RequestMapping("/lang")
     String lang() {
         return langRequester.getMessage("hello") + ' ' + langRequester.getMessage("only");
+    }
+
+    @RequestMapping(value = "/converter", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    MyObject convert() {
+        return new MyObject("hello");
     }
 
 }
