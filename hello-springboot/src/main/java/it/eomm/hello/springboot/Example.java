@@ -1,13 +1,18 @@
 package it.eomm.hello.springboot;
 
+import it.eomm.hello.springboot.demo.lang.LangRequester;
+import it.eomm.hello.springboot.demo.lang.LangResource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 
 /**
@@ -23,7 +28,14 @@ import org.springframework.web.bind.annotation.RestController;
 // understand how you will want to configure String based on jar dependancies.
 // Auto-configuration is designed to work well with “Starters” dependancies.
 @EnableAutoConfiguration
+
+// Enables support for handling components marked with AspectJ's @Aspect annotation.
+// It let you use the proxyMode for request scoped beans.
+@EnableAspectJAutoProxy
 public class Example {
+
+    @Autowired
+    private LangRequester langRequester;
 
     public static void main(String[] args) throws Exception {
 //        SpringApplication.run(Example.class, args);
@@ -44,6 +56,12 @@ public class Example {
     @RequestMapping("/")
     String home() {
         return "Hello World!";
+    }
+
+
+    @RequestMapping("/lang")
+    String lang() {
+        return langRequester.getMessage("hello") + ' ' + langRequester.getMessage("only");
     }
 
 }
