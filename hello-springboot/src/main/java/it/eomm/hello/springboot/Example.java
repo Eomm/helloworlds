@@ -2,6 +2,8 @@ package it.eomm.hello.springboot;
 
 import it.eomm.hello.springboot.demo.converter.MyObject;
 import it.eomm.hello.springboot.demo.lang.LangRequester;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
@@ -34,6 +36,8 @@ import org.springframework.web.bind.annotation.RestController;
 @EnableAspectJAutoProxy
 public class Example {
 
+    private final static Logger log = LogManager.getLogger(Example.class);
+
     @Autowired
     private LangRequester langRequester;
 
@@ -45,7 +49,7 @@ public class Example {
         app.addListeners(new ApplicationListener<ApplicationEvent>() {
             @Override
             public void onApplicationEvent(ApplicationEvent applicationEvent) {
-                System.out.println("An event occurred: " + applicationEvent.getClass());
+                log.debug("An event occurred: " + applicationEvent.getClass());
             }
         });
         app.run(args);
@@ -55,6 +59,7 @@ public class Example {
     // routing like servlet mapping
     @RequestMapping("/")
     String home() {
+        log.info("Called home");
         return "Hello World!";
     }
 

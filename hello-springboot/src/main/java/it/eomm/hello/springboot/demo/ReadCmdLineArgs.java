@@ -1,5 +1,7 @@
 package it.eomm.hello.springboot.demo;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.stereotype.Component;
@@ -10,11 +12,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class ReadCmdLineArgs {
 
+    private final static Logger log = LogManager.getLogger(ReadCmdLineArgs.class);
+
     @Autowired
     public ReadCmdLineArgs(ApplicationArguments args) {
-        System.out.println("ARGs:");
+        log.info("ARGs:");
         for (String arg : args.getSourceArgs()) {
-            System.out.println(" ---> " + arg);
+            log.debug(" ---> " + arg);
         }
     }
 

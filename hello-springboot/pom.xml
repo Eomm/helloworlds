@@ -29,6 +29,17 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+
+            <!-- If I don't want use sl4j or java.util.logging i remove the import.
+                 Then add my preferred logger like log4j2.
+                 This is only for reduce the number of unused libraries;
+                 You could just add your logging library  -->
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!--spring-boot-devtools will disable caching options by default.-->
@@ -43,6 +54,20 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-aspects</artifactId>
+        </dependency>
+
+        <!-- My preferred logger.. can be anyone else -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-jcl</artifactId>
         </dependency>
 
     </dependencies>

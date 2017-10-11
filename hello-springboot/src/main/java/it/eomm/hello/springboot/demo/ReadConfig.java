@@ -1,5 +1,7 @@
 package it.eomm.hello.springboot.demo;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -13,6 +15,8 @@ import javax.annotation.PostConstruct;
  */
 @Component
 public class ReadConfig {
+
+    private final static Logger log = LogManager.getLogger(ReadConfig.class);
 
     // Usage: Add the JVM property at mvn spring:run
     // -Dspring-boot.run.jvmArguments=-Dread.from.jvm.args=hello
@@ -36,7 +40,7 @@ public class ReadConfig {
 
     @PostConstruct
     public void checkConfig() {
-        System.out.println("Read a bean from the app's context: \n" +
+        log.info("Read a bean from the app's context: \n" +
                 "JVM: " + this.getFromJvm() + '\n' +
                 "File prop: " + this.getFromFileProps() + '\n' +
                 "Random: " + this.getRandom() + '\n' +

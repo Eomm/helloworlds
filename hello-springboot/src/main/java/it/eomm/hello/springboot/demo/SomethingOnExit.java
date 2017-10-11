@@ -1,5 +1,7 @@
 package it.eomm.hello.springboot.demo;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PreDestroy;
@@ -10,9 +12,11 @@ import javax.annotation.PreDestroy;
 @Component
 public class SomethingOnExit {
 
+    private final static Logger log = LogManager.getLogger(SomethingOnExit.class);
+
     @PreDestroy
     public void onShoutdown() {
-        System.out.println("The application is shouting down...");
+        log.warn("The application is shouting down...");
 
 
     }

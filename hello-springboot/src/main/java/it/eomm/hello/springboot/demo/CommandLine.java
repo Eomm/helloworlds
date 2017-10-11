@@ -1,5 +1,7 @@
 package it.eomm.hello.springboot.demo;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -11,9 +13,10 @@ import org.springframework.stereotype.Component;
 @Order(value = 1)
 public class CommandLine implements CommandLineRunner {
 
+    private final static Logger log = LogManager.getLogger(CommandLine.class);
 
     @Override
     public void run(String... strings) throws Exception {
-        System.out.println("CommandLine after SpringApplication has started!");
+        log.info("CommandLine after SpringApplication has started!");
     }
 }
