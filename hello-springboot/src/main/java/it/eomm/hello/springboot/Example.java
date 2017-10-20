@@ -1,5 +1,6 @@
 package it.eomm.hello.springboot;
 
+import io.swagger.annotations.ApiImplicitParam;
 import it.eomm.hello.springboot.demo.converter.MyObject;
 import it.eomm.hello.springboot.demo.lang.LangRequester;
 import org.apache.logging.log4j.LogManager;
@@ -13,6 +14,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -58,12 +60,13 @@ public class Example {
 
     }
 
-    @RequestMapping("/lang")
+    @GetMapping("/lang")
+    @ApiImplicitParam(name = "Accept-Language", value = "Lang", paramType  = "header", dataType = "string", required = true)
     String lang() {
         return langRequester.getMessage("hello") + ' ' + langRequester.getMessage("only");
     }
 
-    @RequestMapping(value = "/converter", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @GetMapping(value = "/converter", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     MyObject convert() {
         return new MyObject("hello");
     }

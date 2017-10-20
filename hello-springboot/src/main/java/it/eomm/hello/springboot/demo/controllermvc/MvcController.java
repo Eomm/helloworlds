@@ -1,6 +1,7 @@
 package it.eomm.hello.springboot.demo.controllermvc;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Map;
@@ -16,13 +17,13 @@ public class MvcController {
      *
      * @param model
      */
-    @RequestMapping("/home")
+    @GetMapping("/home")
     String home(Map<String, Object> model) {
         model.put("name", "John Doe");
         return "home"; // return the name of the VIEW to show
     }
 
-    @RequestMapping("/error-mvc")
+    @GetMapping("/error-mvc")
     String error(Map<String, Object> model) {
         // This error is not catch by the MyControllerAdvice thanks the different package configured
         throw new NullPointerException("Ops, this is an error");
