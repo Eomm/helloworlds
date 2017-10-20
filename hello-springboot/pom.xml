@@ -56,6 +56,12 @@
             <artifactId>spring-aspects</artifactId>
         </dependency>
 
+        <!-- Add  thymeleaf template library. Could use FreeMarker or Groovy -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
         <!-- My preferred logger.. can be anyone else -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>

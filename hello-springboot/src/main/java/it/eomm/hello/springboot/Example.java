@@ -16,6 +16,8 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 
 /**
  * Created by Manuel Spigolon on 28/07/2017.
@@ -55,14 +57,6 @@ public class Example {
         app.run(args);
 
     }
-
-    // routing like servlet mapping
-    @RequestMapping("/")
-    String home() {
-        log.info("Called home");
-        return "Hello World!";
-    }
-
 
     @RequestMapping("/lang")
     String lang() {
