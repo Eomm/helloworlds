@@ -1,13 +1,10 @@
 package it.eomm.hello.springboot.demo.controller;
 
-import it.eomm.hello.springboot.demo.exception.ApplicationException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.validation.constraints.Null;
 
 /**
  * Created by Manuel Spigolon on 20/10/2017.

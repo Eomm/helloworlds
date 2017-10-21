@@ -15,10 +15,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Map;
 
 
 /**
@@ -61,7 +58,7 @@ public class Example {
     }
 
     @GetMapping("/lang")
-    @ApiImplicitParam(name = "Accept-Language", value = "Lang", paramType  = "header", dataType = "string", required = true)
+    @ApiImplicitParam(name = "Accept-Language", value = "Lang", paramType = "header", dataType = "string", required = true)
     String lang() {
         return langRequester.getMessage("hello") + ' ' + langRequester.getMessage("only");
     }

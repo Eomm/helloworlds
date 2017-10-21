@@ -2,7 +2,6 @@ package it.eomm.hello.springboot.demo.controllermvc;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Map;
 
@@ -26,6 +25,7 @@ public class MvcController {
     @GetMapping("/error-mvc")
     String error(Map<String, Object> model) {
         // This error is not catch by the MyControllerAdvice thanks the different package configured
+        // Will response the Whitelabel auto-configured by BasicErrorController
         throw new NullPointerException("Ops, this is an error");
     }
 

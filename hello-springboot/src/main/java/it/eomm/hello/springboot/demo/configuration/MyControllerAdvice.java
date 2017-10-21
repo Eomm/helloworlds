@@ -14,6 +14,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import javax.servlet.http.HttpServletRequest;
 
 /**
+ * https://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/#boot-features-error-handling
  * Created by Manuel Spigolon on 20/10/2017.
  */
 @ControllerAdvice(basePackageClasses = ApiController.class)

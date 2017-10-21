@@ -38,6 +38,7 @@ public class MvcConfig implements WebMvcConfigurer {
 
     /**
      * This configuration suppose you have added a template engine like thymeleaf.
+     *
      * @param registry
      */
     @Override

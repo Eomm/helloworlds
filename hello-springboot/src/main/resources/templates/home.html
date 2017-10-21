@@ -6,5 +6,8 @@
 <body>
 This is HOME PAGE.<br>
 <span th:text="'Hello: ' + ${name}"></span>, this name is pulled from the <code>model</code> returned by the <code>MvcController</code>
+<br>
+<br>
+<a th:href="@{/does-not-exist?customViewResolver=true}">Test custom error view resolver</a>
 </body>
 </html>
