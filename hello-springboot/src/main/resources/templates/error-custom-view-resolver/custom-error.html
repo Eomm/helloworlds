@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+This is CUSTOM ERROR PAGE occurs <span th:text="${timestamp}"></span><br>
+<span th:text="'Error '+ ${message} +' status: ' + ${status}"></span>, this name is pulled from the <code>model</code> returned by the <code>CustomViewResolver</code>
+</body>
+</html>
