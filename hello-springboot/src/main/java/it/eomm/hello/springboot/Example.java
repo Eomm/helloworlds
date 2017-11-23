@@ -14,6 +14,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.http.MediaType;
+import org.springframework.retry.annotation.EnableRetry;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,7 +37,8 @@ import org.springframework.web.bind.annotation.RestController;
 // Enables support for handling components marked with AspectJ's @Aspect annotation.
 // It let you use the proxyMode for request scoped beans.
 @EnableAspectJAutoProxy
-@EnableAsync
+@EnableAsync // Enable @Async
+@EnableRetry // Enable @Retryable annotation
 public class Example {
 
     private final static Logger log = LogManager.getLogger(Example.class);
