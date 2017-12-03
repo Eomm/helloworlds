@@ -3,6 +3,7 @@
 const routeIndex = require('./index');
 const routeUsers = require('./users');
 const routeTimer = require('./timer');
+const routeStream = require('./stream');
 
 
 class RouterManager {
@@ -18,7 +19,8 @@ class RouterManager {
         this.routing = {
             '/': routeIndex,
             '/users': routeUsers,
-            '/time': routeTimer
+            '/time': routeTimer,
+            '/stream': routeStream
         };
     }
 }

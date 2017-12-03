@@ -7,6 +7,7 @@ app.listen(3000, function () {
     console.log("Server UP and running");
 });
 
+// this assignment is possible thank sto process.nextTick()
 process.on('uncaughtException', (err) => {
     console.error('whoops! there was an error not intercepted', err);
 });
