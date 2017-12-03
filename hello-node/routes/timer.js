@@ -19,8 +19,16 @@ timeEmitter.prependListener('event', () => console.log('prepended listener'));
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-    timeEmitter.emit('event');
     res.json({time: timing});
 });
+
+router.get('/stop', function (req, res, next) {
+    clearInterval(intervalObj);
+    res.json({time: timing});
+});
+
+const intervalObj = setInterval(() => {
+    timeEmitter.emit('event');
+}, 1000);
 
 module.exports = router;
