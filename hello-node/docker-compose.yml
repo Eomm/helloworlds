@@ -17,3 +17,13 @@ services:
     #  - .:/opt/app
     environment:
       - NODE_ENV=development
+      - REDIS_HOST=redis
+    depends_on:
+      - redis
+  redis:
+    image: redis:4
+    volumes:
+      - redis-data:/data
+
+volumes:
+  redis-data:
