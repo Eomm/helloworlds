@@ -36,3 +36,22 @@ the project need a Redis up and running on your machine.
 This why I wanted try it and Docker as well.
 I'll commit all the utilities for simply your work and your (and mine) understanding.
 
+TODO: add URL exposed
+
+#### Docker
+
+Docker has been added to the project!!
+Here some command for run this sample project.
+
+|Description|Command|
+|---|---|
+|**Without composer**||
+|Build image|`docker build -t eomm/hello-node .`|
+|Start container|`docker container run -d --rm --name hello-node eomm/hello-node`|
+|Stop container|`docker container stop hello-node`|
+|**With composer**||
+|Build image|`docker-compose build --no-cache`
+|Start container|`docker-compose up -d`
+|See logs|`docker-compose logs -f`|
+|Stop container|`docker-compose down`|
+|Accessing the container with `@root` user|`docker exec -u 0 -it hellonode_node_1 bash`|

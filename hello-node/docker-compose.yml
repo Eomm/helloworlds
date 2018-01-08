@@ -1,0 +1,19 @@
+version: '3.1'
+
+services:
+  node:
+    build:
+      context: .
+      args:
+        - NODE_ENV=development
+        - PORT=3000
+    image: eomm/hello-node
+    command: ../node_modules/.bin/nodemon --inspect=0.0.0.0:9229
+    ports:
+      - "80:3000"
+      - "5858:5858"
+      - "9229:9229"
+    #volumes: # for DEV only
+    #  - .:/opt/app
+    environment:
+      - NODE_ENV=development
