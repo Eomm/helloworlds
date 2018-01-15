@@ -7,14 +7,17 @@ const timeEmitter = new EventEmitter();
 
 let timing = 0;
 
+// EcmaScript6 - Symbol
+const eventEmitted = Symbol('my event');
+
 // The EventEmitter calls all listeners synchronously in the order in which they were registered
-timeEmitter.on('event', () => {
+timeEmitter.on(eventEmitted, () => {
     setImmediate(() => {
         console.log('this happens asynchronously');
     });
     timing++;
 });
-timeEmitter.prependListener('event', () => console.log('prepended listener'));
+timeEmitter.prependListener(eventEmitted, () => console.log('prepended listener'));
 
 
 /* GET home page. */
@@ -28,7 +31,12 @@ router.get('/stop', function (req, res, next) {
 });
 
 const intervalObj = setInterval(() => {
-    timeEmitter.emit('event');
+    timeEmitter.emit(eventEmitted);
+
+    if (timing == 5) {
+        console.log("Stopping emitter");
+        clearInterval(intervalObj);
+    }
 }, 1000);
 
 module.exports = router;

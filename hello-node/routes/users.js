@@ -11,12 +11,9 @@ router.get('/', function (req, res, next) {
         .then(buffer => {
             // API to make it possible to interact with octet streams
             // in the context of things like TCP streams and file system operations.
-
-
-        });
-
-
-    res.send('respond with a resource');
+            res.json(JSON.parse(buffer.toString())); // print out the data inside
+        })
+        .catch(() => res.send('error getting all users'));
 });
 
 router.get('/:id', function (req, res, next) {

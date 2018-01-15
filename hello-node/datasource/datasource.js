@@ -26,7 +26,7 @@ class Datasource {
      * @return {Promise.<Buffer2>}
      */
     findAllUsers() {
-        return Promise.resolve(Buffer.from(this.data.users));
+        return Promise.resolve(Buffer.from(JSON.stringify(this.data.users)));
     }
 
     /**
