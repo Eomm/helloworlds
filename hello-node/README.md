@@ -55,3 +55,8 @@ Here some command for run this sample project.
 |See logs|`docker-compose logs -f`|
 |Stop container|`docker-compose down`|
 |Accessing the container with `@root` user|`docker exec -u 0 -it hellonode_node_1 bash`|
+
+This command are designed for running under "development" environment.
+For an hypothetical production environment you shall use:
+
+`docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d`

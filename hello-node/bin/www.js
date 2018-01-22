@@ -23,7 +23,11 @@ process.on('SIGINT', function onSigint() {
 process.on('SIGTERM', function onSigterm() {
     console.info('Got SIGTERM (docker container stop). Graceful shutdown ', new Date().toISOString());
     shutdown();
-})
+});
+
+process.on('beforeExit', function (exitCode) {
+    console.log("Before exit, loop event empty");
+});
 
 // shut down server
 function shutdown() {
