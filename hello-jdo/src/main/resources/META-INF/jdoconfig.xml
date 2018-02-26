@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jdoconfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns="http://xmlns.jcp.org/xml/ns/jdo/jdoconfig"
+           xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/jdo/jdoconfig
+        http://xmlns.jcp.org/xml/ns/jdo/jdoconfig_3_2.xsd" version="3.2">
+
+    <!--https://db.apache.org/jdo/pmf.html-->
+    <persistence-manager-factory name="hello-jdo-pm">
+        <property name="javax.jdo.PersistenceManagerFactoryClass"
+                  value="org.datanucleus.api.jdo.JDOPersistenceManagerFactory"/>
+        <property name="javax.jdo.option.ConnectionURL" value="jdbc:h2:./test.db"/>
+        <property name="javax.jdo.option.ConnectionUserName" value=""/>
+        <property name="javax.jdo.option.ConnectionPassword" value=""/>
+        <property name="javax.jdo.option.ConnectionDriverName" value="org.h2.Driver"/>
+        <property name="javax.jdo.option.Optimistic" value="true"/>
+        <property name="datanucleus.schema.autoCreateAll" value="true"/>
+    </persistence-manager-factory>
+
+</jdoconfig>
