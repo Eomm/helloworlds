@@ -1,0 +1,19 @@
+version: '3.1'
+
+services:
+  node:
+    build:
+      context: .
+      args:
+        - NODE_ENV=development
+        - PORT=3000
+#    command: ../node_modules/.bin/nodemon --inspect=0.0.0.0:9229
+    command: node --inspect=0.0.0.0:9229 bin/www.js
+    ports:
+      - "80:3000"
+      - "5858:5858"
+      - "9229:9229"
+    volumes:
+      - .:/opt/app
+    environment:
+      - NODE_ENV=development

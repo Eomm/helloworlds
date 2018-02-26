@@ -1,0 +1,25 @@
+version: '3.1'
+
+services:
+  node:
+    image: eomm/hello-node:lastest
+    environment:
+      - REDIS_HOST=redis
+    depends_on:
+      - redis
+  redis:
+    image: redis:4
+    volumes:
+      - redis-data:/data
+#  search:
+#    image: elasticsearch:5
+#    volumes:
+#      - elastic-data:/usr/share/elasticsearch/data
+#    ports:
+#      - "9200:9200"
+#    environment:
+#      - ES_JAVA_OPTS=-Xms512m -Xmx512m # for run with low RAM PC
+
+volumes:
+  redis-data:
+  elastic-data:
