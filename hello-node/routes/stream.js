@@ -11,6 +11,7 @@ router.get('/', function (req, res, next) {
 
     readableStream.setEncoding('utf8');
 
+    // every stream is also an EventEmitter
     readableStream.on('data', function (chunk) {
         data += chunk;
     });
