@@ -1,0 +1,14 @@
+version: '3.1'
+
+services:
+ search:
+   image: elasticsearch:5
+   volumes:
+     - elastic-data:/usr/share/elasticsearch/data
+   ports:
+     - "9200:9200"
+   environment:
+     - ES_JAVA_OPTS=-Xms512m -Xmx512m # for run with low RAM PC
+
+volumes:
+  elastic-data:

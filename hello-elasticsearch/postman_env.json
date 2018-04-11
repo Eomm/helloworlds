@@ -1,0 +1,44 @@
+{
+  "id": "8f48deb6-405d-4925-b373-05cea74f71a3",
+  "name": "elasticsearch",
+  "values": [
+    {
+      "key": "host",
+      "value": "192.168.99.100",
+      "description": "",
+      "type": "text",
+      "enabled": true
+    },
+    {
+      "key": "port",
+      "value": "9200",
+      "description": "",
+      "type": "text",
+      "enabled": true
+    },
+    {
+      "key": "index",
+      "value": "my-index",
+      "description": "",
+      "type": "text",
+      "enabled": true
+    },
+    {
+      "key": "type",
+      "value": "doc",
+      "description": "",
+      "type": "text",
+      "enabled": true
+    },
+    {
+      "key": "aliasFiltered",
+      "value": "my-alias",
+      "description": "",
+      "type": "text",
+      "enabled": true
+    }
+  ],
+  "_postman_variable_scope": "environment",
+  "_postman_exported_at": "2018-04-11T19:52:15.320Z",
+  "_postman_exported_using": "Postman/6.0.10"
+}

@@ -1,0 +1,757 @@
+{
+	"info": {
+		"_postman_id": "3aa7742a-1492-161c-7553-86ab2ab64247",
+		"name": "Elastic",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Index",
+			"description": "",
+			"item": [
+				{
+					"name": "Index list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/_cat/indices?v",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"_cat",
+								"indices"
+							],
+							"query": [
+								{
+									"key": "v",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create index",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/{{index}}?pretty",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{index}}"
+							],
+							"query": [
+								{
+									"key": "pretty",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create index with mapping",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"mappings\": {\r\n    \"logs\": {\r\n      \"properties\": {\r\n\t      \"age\": {\r\n\t          \"type\": \"byte\"\r\n\t      }\r\n\t  }\r\n    }\r\n  }\r\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/{{index}}?pretty",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{index}}"
+							],
+							"query": [
+								{
+									"key": "pretty",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Index exist",
+					"request": {
+						"method": "HEAD",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/{{index}}",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{index}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Index filtered alias",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"actions\" : [\r\n        {\r\n            \"add\" : {\r\n                 \"index\" : \"{{index}}\",\r\n                 \"alias\" : \"my-alias\"\r\n            }\r\n        },\r\n        {\r\n            \"add\" : {\r\n                 \"index\" : \"{{index}}\",\r\n                 \"alias\" : \"{{aliasFiltered}}\",\r\n                 \"filter\" : { \"term\" : { \"_id\" : 1 } }\r\n            }\r\n        }\r\n    ]\r\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/_alias",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"_alias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Index aliases",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/{{index}}/_alias",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{index}}",
+								"_alias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Index setting",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/{{index}}/_settings",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{index}}",
+								"_settings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Index close",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/{{index}}/_close",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{index}}",
+								"_close"
+							]
+						},
+						"description": "The open and close index APIs allow to close an index, and later on opening it. A closed index has almost no overhead on the cluster (except for maintaining its metadata), and is blocked for read/write operations. A closed index can be opened which will then go through the normal recovery process."
+					},
+					"response": []
+				},
+				{
+					"name": "Index open",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/{{index}}/_open",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{index}}",
+								"_open"
+							]
+						},
+						"description": "The open and close index APIs allow to close an index, and later on opening it. A closed index has almost no overhead on the cluster (except for maintaining its metadata), and is blocked for read/write operations. A closed index can be opened which will then go through the normal recovery process."
+					},
+					"response": []
+				},
+				{
+					"name": "Index refresh",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/{{index}}/_refresh",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{index}}",
+								"_refresh"
+							]
+						},
+						"description": "The refresh API allows to explicitly refresh one or more index, making all operations performed since the last refresh available for search. The (near) real-time capabilities depend on the index engine used. For example, the internal one requires refresh to be called, but by default a refresh is scheduled periodically."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete index",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/{{index}}?pretty",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{index}}"
+							],
+							"query": [
+								{
+									"key": "pretty",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Mapping",
+			"description": "",
+			"item": [
+				{
+					"name": "Type exist",
+					"request": {
+						"method": "HEAD",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/{{index}}/_mapping/{{type}}",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{index}}",
+								"_mapping",
+								"{{type}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Index mapping",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/{{index}}/_mapping/{{type}}",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{index}}",
+								"_mapping",
+								"{{type}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update mapping field",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"properties\": {\r\n    \"age\": {\r\n        \"type\": \"byte\",\r\n        \"coerce\": true\r\n    },\r\n    \"name\": {\r\n        \"type\": \"text\",\r\n        \"fields\": {\r\n            \"keyword\": {\r\n                \"type\": \"keyword\",\r\n                \"ignore_above\": 500\r\n            }\r\n        }\r\n    }\r\n  }\r\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/{{index}}/_mapping/{{type}}",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{index}}",
+								"_mapping",
+								"{{type}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Document",
+			"description": "",
+			"item": [
+				{
+					"name": "Create document",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"John Doe\"\r\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/{{index}}/{{type}}?pretty",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{index}}",
+								"{{type}}"
+							],
+							"query": [
+								{
+									"key": "pretty",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create document with timeout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"John Doe\"\r\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/{{index}}/{{type}}?pretty&timeout=5m",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{index}}",
+								"{{type}}"
+							],
+							"query": [
+								{
+									"key": "pretty",
+									"value": null
+								},
+								{
+									"key": "timeout",
+									"value": "5m"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upsert document with id Copy",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"John Doe\"\r\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/{{index}}/{{type}}/1?pretty",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{index}}",
+								"{{type}}",
+								"1"
+							],
+							"query": [
+								{
+									"key": "pretty",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update document",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"doc\": { \"name\": \"John Doe Updated\", \"age\": 20 }\r\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/{{index}}/{{type}}/1/_update?pretty",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{index}}",
+								"{{type}}",
+								"1",
+								"_update"
+							],
+							"query": [
+								{
+									"key": "pretty",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update document with script",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"script\" : \"ctx._source.age += 5\"\r\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/{{index}}/{{type}}/1/_update?pretty",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{index}}",
+								"{{type}}",
+								"1",
+								"_update"
+							],
+							"query": [
+								{
+									"key": "pretty",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read document",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/{{index}}/{{type}}/1?pretty",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{index}}",
+								"{{type}}",
+								"1"
+							],
+							"query": [
+								{
+									"key": "pretty",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read document source",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/{{index}}/{{type}}/1/_source",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{index}}",
+								"{{type}}",
+								"1",
+								"_source"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read document source fitered",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/{{index}}/{{type}}/1/_source?_source=*e",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{index}}",
+								"{{type}}",
+								"1",
+								"_source"
+							],
+							"query": [
+								{
+									"key": "_source",
+									"value": "*e"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read all documents",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/{{index}}/_search?pretty",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{index}}",
+								"_search"
+							],
+							"query": [
+								{
+									"key": "pretty",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read all documents from alias",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/{{aliasFiltered}}/_search?pretty",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{aliasFiltered}}",
+								"_search"
+							],
+							"query": [
+								{
+									"key": "pretty",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete document",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/{{index}}/{{type}}/1?pretty",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{index}}",
+								"{{type}}",
+								"1"
+							],
+							"query": [
+								{
+									"key": "pretty",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Bulk actions",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"index\":{\"_id\":\"1\"}}\r\n{\"name\": \"John Doe\", \"age\": 25, \"birthday\": \"1990-12-25\"}\r\n{\"index\":{\"_id\":\"2\"}}\r\n{\"name\": \"Jane Doe\" }\r\n{\"index\":{\"_id\":\"3\"}}\r\n{\"name\": \"Miki Doe\", \"age\": 5 }\r\n{\"update\":{\"_id\":\"1\"}}\r\n{\"doc\": { \"name\": \"John Doe becomes Jane Doe\" } }\r\n{\"delete\":{\"_id\":\"3\"}}\r\n"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/{{index}}/{{type}}/_bulk?pretty",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{index}}",
+								"{{type}}",
+								"_bulk"
+							],
+							"query": [
+								{
+									"key": "pretty",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
