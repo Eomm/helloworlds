@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Grill from './finger-follow';
 import './index.css';
 
 
@@ -109,6 +110,7 @@ function calculateWinner(squares) {
 // ========================================
 
 ReactDOM.render(
-    <Game />,
+    // <Game />,
+    <Grill />,
     document.getElementById('root')
 );
