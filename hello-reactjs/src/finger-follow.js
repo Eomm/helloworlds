@@ -10,23 +10,10 @@ class Hand extends React.Component {
   }
 
   contains(x, y) {
-    /* {
-    "x":127.4375,
-    "y":75.4000015258789,
-    "width":695.6749877929688,
-    "height":22,
-    "top":75.4000015258789,
-    "right":823.1124877929688,
-    "bottom":97.4000015258789,
-    "left":127.4375} 
-    */
     const box = this.ref.getBoundingClientRect();
     //  console.log(x + '-' + y + ' //// ' + box.x + '-' + box.y);
 
-
     let out = -1;
-
-
     if (x >= box.x && x <= box.x + box.width && y >= box.y && y <= box.y + box.height) {
       out = 5;
     } else if (x < box.x && y < box.y) {
@@ -90,14 +77,14 @@ class Hand extends React.Component {
     this.setState({ char: char })
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextState.char !== this.state.char;
+  }
+
   render() {
     return (
       <button className="hand"
-        ref={e => this.ref = e}
-      // onMouseMove={this.props.onMouseMove}
-      // onMouseOver={this.updateChar.bind(this, '👊🏽')}
-      // onMouseLeave={this.updateChar.bind(this, '✋🏼')}
-      >
+        ref={e => this.ref = e} >
         {this.state.char}
       </button>
     );
@@ -112,8 +99,9 @@ class Board extends React.Component {
   constructor(props) {
     super(props);
 
-    const squares = 100;
-    this.rows = [];//Array(squares);
+    const squares = 1000;
+    const rowLength = 30;
+    this.rows = [];
     const view = [];
 
     this.state = {
@@ -123,7 +111,7 @@ class Board extends React.Component {
 
     let i = 0;
     do {
-      if (i % 10 === 0) {
+      if (i % rowLength === 0) {
         view.push(<Br />);
       }
       view.push(<Hand initChar='✋🏼' ref={(e) => { this.rows.push(e); }} />);
@@ -135,11 +123,17 @@ class Board extends React.Component {
     this.rows.forEach(r => r.updateState(mouseEvent));
   }
 
+  resetState() {
+    this.rows.forEach(r => r.updateChar('✋🏼'));
+  }
+
   render() {
     console.log('render');
     return (
       <div>
-        <div className="grill-row" onMouseMove={this.updateState.bind(this)}>
+        <div className="grill-row"
+          onMouseMove={this.updateState.bind(this)}
+          onMouseOut={() => this.resetState()} >
           {this.state.view}
         </div>
       </div>
