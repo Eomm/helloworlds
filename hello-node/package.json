@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www.js",
+    "test": "jest --coverage",
     "locl-debug": "node --inspect ./bin/www.js",
     "locl-trace": "node --trace-events-enabled ./bin/www.js",
     "dev-docker": "./node_modules/nodemon/bin/nodemon.js --debug=5858",
@@ -23,7 +24,10 @@
     "serve-favicon": "~2.4.5"
   },
   "devDependencies": {
-    "nodemon": "^1.14.11"
+    "@types/jest": "^23.1.0",
+    "jest": "^22.4.4",
+    "nodemon": "^1.14.11",
+    "coveralls": "^3.0.1"
   },
   "nodemonConfig": {
     "ignore": [
