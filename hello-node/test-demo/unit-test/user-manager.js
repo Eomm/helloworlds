@@ -5,9 +5,13 @@ class UserManager {
     this.userList = null;
   }
 
+  /**
+   * 
+   * @param {number} userId 
+   */
   getUser(userId) {
     return this.getUsers()
-      .then(users => users.find(user => user.id === userId))
+      .then(users => users.find(user => user === userId))
       .then(findUser => (findUser !== undefined ? findUser : Promise.reject(userId)))
   }
 

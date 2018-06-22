@@ -1,23 +1,24 @@
 'use strict';
+// @ts-check
 
-const UserManager = require('./user-manager');
+const UserManager = require('./user-manager-mongo');
 
-describe('User Manager Test', () => {
+describe('User Manager Integration Test', () => {
   it('get all users', () => {
     const userManager = new UserManager();
-    userManager.getUsers().then(userList => expect(userList).toHaveLength(3));
+    return userManager.getUsers().then(userList => expect(userList).toHaveLength(3));
   });
 
   it('get existing user', () => {
     const userManager = new UserManager();
-    userManager
+    return userManager
       .getUser(1)
-      .then(user => expect(user).existing());
+      .then(user => expect(user).toEqual(1));
   });
 
   it('get unexisting user', () => {
     const userManager = new UserManager();
-    userManager
+    return userManager
       .getUser(42)
       .catch(userId => expect(userId).toBeDefined());
   });
