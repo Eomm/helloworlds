@@ -7,7 +7,7 @@ class UserManager {
     this.userList = null;
 
     // read also from file..
-    this.config = { host: 'mongo://local', port: 1234 };
+    this.config = { host: '127.0.0.1', port: 3000 };
     this.datasource = new MongoDatasource();
   }
 
